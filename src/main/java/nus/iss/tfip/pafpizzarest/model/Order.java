@@ -3,16 +3,12 @@ package nus.iss.tfip.pafpizzarest.model;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Order {
     private Integer order_id;
-    private Pizza pizza;
+    private Pizza pizza = new Pizza();
     private Size size;
 
     @NotNull(message = "Please enter number of pizzas")
@@ -23,7 +19,14 @@ public class Order {
     private Customer customer;
     private Boolean rush;
     private String comments;
-    private Float totalCost = null;
+    private Float totalCost;
+
+    public Order() {
+        this.pizza = new Pizza();
+        this.size = new Size();
+        this.customer = new Customer();
+        this.rush = false;
+    }
 
     private Float getTotal() {
         if (this.totalCost != null ){
