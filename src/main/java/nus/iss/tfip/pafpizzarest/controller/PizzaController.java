@@ -14,6 +14,7 @@ import nus.iss.tfip.pafpizzarest.exception.PizzaException;
 import nus.iss.tfip.pafpizzarest.model.Order;
 import nus.iss.tfip.pafpizzarest.model.Pizza;
 import nus.iss.tfip.pafpizzarest.service.PizzaService;
+import nus.iss.tfip.pafpizzarest.util.PizzaUtil;
 
 @Controller
 @RequestMapping(path = "/pizza")
@@ -27,7 +28,7 @@ public class PizzaController {
         pizzaSvc.testConn();
         // IF INPUT ERROR
         if (binding.hasErrors()) {
-            System.err.println(binding.getAllErrors().get(0).getDefaultMessage().toString());
+            System.err.println(PizzaUtil.getValidationError(binding));
             model.addAttribute("pizza", pizza);
             return "index";
         }
@@ -43,7 +44,7 @@ public class PizzaController {
     public String detailsForm(@Valid Order order, BindingResult binding, Model model, HttpSession session) throws PizzaException {
         // IF INPUT ERROR
         if (binding.hasErrors()) {
-            System.err.println(binding.getAllErrors().get(0).getDefaultMessage().toString());
+            System.err.println(PizzaUtil.getValidationError(binding));
             model.addAttribute("order", order);
             return "deliverydetails";
         }
