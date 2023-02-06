@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 public class Order {
-    private String id;
+    private Integer id;
 
     @Size(min = 3, message = "Name must be minimum 3 characters")
     private String name;
@@ -24,22 +24,13 @@ public class Order {
     private String comments;
 
     private Pizza pizza;
-
-    public Order() {
-        this.id = generateId(8);
-    }
-
-    private synchronized String generateId(int numChars) {
-        Random r = new Random();
-        StringBuilder strBuilder = new StringBuilder();
-        while (strBuilder.length() < numChars) {
-            strBuilder.append(Integer.toHexString(r.nextInt()));
-        }
-        return strBuilder.toString().substring(0, numChars);
-    }
-
-    public String getId() {
+    
+    public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
