@@ -19,6 +19,10 @@ public class OrderRepository {
     @Autowired
     private JdbcTemplate template;
 
+    public void testConnection() {
+        System.out.println(template.queryForList("SELECT * FROM `pizza`"));
+    }
+
     public Integer insertOrder(Order order, Integer customerId) {
         KeyHolder holder = new GeneratedKeyHolder();
 

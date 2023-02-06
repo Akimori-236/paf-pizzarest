@@ -24,6 +24,7 @@ public class PizzaController {
 
     @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String pizzaForm(@Valid Pizza pizza, BindingResult binding, Model model, HttpSession session) {
+        pizzaSvc.testConn();
         // IF INPUT ERROR
         if (binding.hasErrors()) {
             System.err.println(binding.getAllErrors().get(0).getDefaultMessage().toString());

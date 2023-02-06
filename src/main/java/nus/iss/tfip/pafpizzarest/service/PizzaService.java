@@ -41,4 +41,8 @@ public class PizzaService {
         return orderID;
     }
 
+    public void testConn() {
+        orderRepo.testConnection();
+    }
+
 }
