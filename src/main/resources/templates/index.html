@@ -22,12 +22,12 @@
             method="POST"
             action="#"
             data-th-action="@{/pizza}"
-            data-th-object="${pizza}"
+            data-th-object="${order}"
         >
             <div>
                 <h2>Select a pizza</h2>
                 <table class="table table-borderless">
-                    <tr>
+                    <tr data-th-object="*{pizza}">
                         <td>
                             <div>
                                 <img src="/images/Bella.png" class="pizza" />
@@ -37,6 +37,7 @@
                                     type="radio"
                                     name="pizza"
                                     value="bella"
+                                    data-th-field="*{type}"
                                 />
                                 Bella
                             </div>
@@ -53,6 +54,7 @@
                                     type="radio"
                                     name="pizza"
                                     value="margherita"
+                                    data-th-field="*{type}"
                                 />
                                 Margherita
                             </div>
@@ -66,6 +68,7 @@
                                     type="radio"
                                     name="pizza"
                                     value="marinara"
+                                    data-th-field="*{type}"
                                 />
                                 Marinara
                             </div>
@@ -82,6 +85,7 @@
                                     type="radio"
                                     name="pizza"
                                     value="spianatacalabrese"
+                                    data-th-field="*{type}"
                                 />
                                 Spianata Calabrese
                             </div>
@@ -98,6 +102,7 @@
                                     type="radio"
                                     name="pizza"
                                     value="trioformaggio"
+                                    data-th-field="*{type}"
                                 />
                                 Trio Formaggio
                             </div>
@@ -107,15 +112,15 @@
                         <td>
                             <span
                                 class="error"
-                                data-th-if="${#fields.hasErrors('pizza')}"
-                                data-th-errors="*{pizza}"
+                                data-th-if="${#fields.hasErrors('pizza.type')}"
+                                data-th-errors="*{pizza.type}"
                             ></span>
                         </td>
                     </tr>
                     <tr>
                         <td>Size:</td>
                         <td>
-                            <select class="form-select" name="size">
+                            <select class="form-select" name="size" data-th-field="*{size.size}">
                                 <option value="sm">Small</option>
                                 <option value="md">Medium</option>
                                 <option value="lg">Large</option>
@@ -127,15 +132,15 @@
                         <td>
                             <span
                                 class="error"
-                                data-th-if="${#fields.hasErrors('size')}"
-                                data-th-errors="*{size}"
+                                data-th-if="${#fields.hasErrors('size.size')}"
+                                data-th-errors="*{size.size}"
                             ></span>
                         </td>
                     </tr>
                     <tr>
                         <td>Quantity:</td>
                         <td colspan="2">
-                            <input class="form-control" type="number" min="0 " name="quantity" />
+                            <input class="form-control" type="number" min="1" name="quantity" data-th-field="*{quantity}" />
                         </td>
                     </tr>
                     <tr>
