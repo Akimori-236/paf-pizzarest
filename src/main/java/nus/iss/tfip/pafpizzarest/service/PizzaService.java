@@ -45,4 +45,8 @@ public class PizzaService {
         orderRepo.testConnection();
     }
 
+    public String getJsonById(String orderId) {
+        return null;
+    }
+
 }
