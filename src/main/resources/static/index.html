@@ -18,12 +18,7 @@
             <h2>Panucci's Pizza</h2>
         </div>
 
-        <form
-            method="POST"
-            action="#"
-            data-th-action="@{/pizza}"
-            data-th-object="${pizza}"
-        >
+        <form method="POST" action="pizza">
             <div>
                 <h2>Select a pizza</h2>
                 <table class="table table-borderless">
@@ -104,15 +99,6 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <span
-                                class="error"
-                                data-th-if="${#fields.hasErrors('pizza')}"
-                                data-th-errors="*{pizza}"
-                            ></span>
-                        </td>
-                    </tr>
-                    <tr>
                         <td>Size:</td>
                         <td>
                             <select class="form-select" name="size">
@@ -123,29 +109,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td>
-                            <span
-                                class="error"
-                                data-th-if="${#fields.hasErrors('size')}"
-                                data-th-errors="*{size}"
-                            ></span>
-                        </td>
-                    </tr>
-                    <tr>
                         <td>Quantity:</td>
-                        <td colspan="2">
-                            <input class="form-control" type="number" min="0 " name="quantity" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
                         <td>
-                            <span
-                                class="error"
-                                data-th-if="${#fields.hasErrors('quantity')}"
-                                data-th-errors="*{quantity}"
-                            ></span>
+                            <input class="form-control" type="number" min="1" name="quantity" />
                         </td>
                     </tr>
                     <tr>
