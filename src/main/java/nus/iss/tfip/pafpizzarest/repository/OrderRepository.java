@@ -20,7 +20,8 @@ public class OrderRepository {
     private JdbcTemplate template;
 
     public void testConnection() {
-        System.out.println(template.queryForList("SELECT * FROM `pizza`"));
+        String response = template.queryForList("SELECT * FROM `pizza`").toString();
+        System.out.println("TEST CONNECTION > " + response);
     }
 
     public Integer insertOrder(Order order, Integer customerId) {

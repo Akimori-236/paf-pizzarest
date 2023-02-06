@@ -2,8 +2,6 @@ package nus.iss.tfip.pafpizzarest.model;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
-import java.util.Random;
-
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
@@ -24,7 +22,7 @@ public class Order {
     private String comments;
 
     private Pizza pizza;
-    
+
     public Integer getId() {
         return id;
     }
