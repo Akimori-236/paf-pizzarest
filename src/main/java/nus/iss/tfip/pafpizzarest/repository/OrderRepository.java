@@ -28,7 +28,7 @@ public class OrderRepository {
 
         template.update((PreparedStatementCreator) con -> {
             PreparedStatement ps = con.prepareStatement(Queries.SQLinsertOrder, Statement.RETURN_GENERATED_KEYS);
-            // (`pizza_id`,`size_id`,`quantity`,`customer_id`,`isRush`,`comments`)
+            // (`pizza_id`,`size_id`,`quantity`,`customer_id`,`rush`,`comments`)
             ps.setString(1, order.getPizza().getPizza());
             ps.setString(2, order.getPizza().getSize());
             ps.setInt(3, order.getPizza().getQuantity());
@@ -39,6 +39,7 @@ public class OrderRepository {
         }, holder);
 
         // comes back as BigInteger, change to int
-        return holder.getKey().intValue();
+        Integer orderID = holder.getKey().intValue();
+        return orderID;
     }
 }

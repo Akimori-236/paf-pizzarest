@@ -11,7 +11,7 @@ public interface Queries {
 
     String SQLinsertOrder = """
             INSERT INTO `order`
-            (`pizza_id`,`size_id`,`quantity`,`customer_id`,`isRush`,`comments`)
+            (`pizza_id`,`size_id`,`quantity`,`customer_id`,`rush`,`comments`)
             VALUES(
             (SELECT pizza_id FROM pizza WHERE type=?),
             (SELECT size_id FROM size WHERE size=?),
