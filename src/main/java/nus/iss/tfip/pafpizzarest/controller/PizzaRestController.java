@@ -13,14 +13,14 @@ import nus.iss.tfip.pafpizzarest.service.PizzaService;
 import nus.iss.tfip.pafpizzarest.util.PizzaUtil;
 
 @RestController
-@RequestMapping(path = "/order")
+@RequestMapping(path = "/api/order")
 public class PizzaRestController {
 
     @Autowired
     private PizzaService pizzaSvc;
 
     @GetMapping(path = "{orderId}")
-    public ResponseEntity<String> getOrder(@PathVariable String orderId) {
+    public ResponseEntity<String> getOrder(@PathVariable Integer orderId) {
         String jsonStr = pizzaSvc.getJsonById(orderId);
         if (jsonStr == "" || jsonStr == null) {
             return ResponseEntity

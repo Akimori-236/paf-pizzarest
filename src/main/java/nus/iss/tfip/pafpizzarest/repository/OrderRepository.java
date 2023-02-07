@@ -2,16 +2,17 @@ package nus.iss.tfip.pafpizzarest.repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import nus.iss.tfip.pafpizzarest.model.Order;
+import nus.iss.tfip.pafpizzarest.exception.PizzaException;
 
 @Repository
 public class OrderRepository {
@@ -40,7 +41,20 @@ public class OrderRepository {
         }, holder);
 
         // comes back as BigInteger, change to int
-        Integer orderID = holder.getKey().intValue();
-        return orderID;
+        Number orderID = holder.getKey();
+        // if (orderID == null) {
+        //     throw new PizzaException("ERROR >>> orderID coming back as null");
+        // }
+        return orderID.intValue();
     }
+
+    public Order getConfirmation(Integer orderId) {
+        return null; // TODO:
+    }
+
+    public Map<String, Object> getJSON(Integer orderId) {
+        Map<String, Object> response = template.queryForMap(Queries.SQLgetJSON, new Object[] { orderId });
+        return response;
+    }
+
 }

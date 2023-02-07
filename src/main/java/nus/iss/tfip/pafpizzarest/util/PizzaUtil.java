@@ -9,7 +9,7 @@ import jakarta.json.Json;
 import jakarta.json.JsonObject;
 
 public class PizzaUtil {
-    public static String notFoundJson(String orderId) {
+    public static String notFoundJson(Integer orderId) {
         JsonObject jObj = Json.createObjectBuilder()
                 .add("message", "Order %s not found".formatted(orderId))
                 .build();
