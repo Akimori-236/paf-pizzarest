@@ -5,14 +5,16 @@ import java.sql.Statement;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import nus.iss.tfip.pafpizzarest.model.Order;
 import nus.iss.tfip.pafpizzarest.exception.PizzaException;
+import nus.iss.tfip.pafpizzarest.model.Confirmation;
+import nus.iss.tfip.pafpizzarest.model.Order;
 
 @Repository
 public class OrderRepository {
@@ -25,7 +27,7 @@ public class OrderRepository {
         System.out.println("TEST CONNECTION > " + response);
     }
 
-    public Integer insertOrder(Order order, Integer customerId) {
+    public Integer insertOrder(Order order, Integer customerId) throws PizzaException {
         KeyHolder holder = new GeneratedKeyHolder();
 
         template.update((PreparedStatementCreator) con -> {
@@ -42,15 +44,17 @@ public class OrderRepository {
 
         // comes back as BigInteger, change to int
         Number orderID = holder.getKey();
-        // if (orderID == null) {
-        //     throw new PizzaException("ERROR >>> orderID coming back as null");
-        // }
+        if (orderID == null) {
+            throw new PizzaException("ERROR >>> orderID coming back as null");
+        }
         return orderID.intValue();
     }
 
-    public Order getConfirmation(Integer orderId) {
-        return null; // TODO:
+    public Confirmation getConfirmation(Integer orderId) {
+        Confirmation conf = template.queryForObject(Queries.SQLgetConfirmation, BeanPropertyRowMapper.newInstance(Confirmation.class), orderId);
+        return conf;
     }
+
 
     public Map<String, Object> getJSON(Integer orderId) {
         Map<String, Object> response = template.queryForMap(Queries.SQLgetJSON, new Object[] { orderId });

@@ -10,6 +10,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import nus.iss.tfip.pafpizzarest.exception.PizzaException;
 import nus.iss.tfip.pafpizzarest.model.Order;
 
 @Repository
@@ -18,7 +19,7 @@ public class CustomerRepository {
     @Autowired
     private JdbcTemplate template;
 
-    public Integer insertCustomer(Order order) {
+    public Integer insertCustomer(Order order) throws PizzaException {
         KeyHolder holder = new GeneratedKeyHolder();
 
         template.update((PreparedStatementCreator) con -> {
@@ -31,6 +32,10 @@ public class CustomerRepository {
         }, holder);
 
         // comes back as BigInteger, change to int
-        return holder.getKey().intValue();
+        Number orderID = holder.getKey();
+        if (orderID == null) {
+            throw new PizzaException("ERROR >>> orderID coming back as null");
+        }
+        return orderID.intValue();
     }
 }
