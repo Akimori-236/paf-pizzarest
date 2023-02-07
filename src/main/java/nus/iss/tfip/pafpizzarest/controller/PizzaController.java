@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import nus.iss.tfip.pafpizzarest.exception.PizzaException;
+import nus.iss.tfip.pafpizzarest.model.Confirmation;
 import nus.iss.tfip.pafpizzarest.model.Order;
 import nus.iss.tfip.pafpizzarest.model.Pizza;
 import nus.iss.tfip.pafpizzarest.service.PizzaService;
@@ -49,9 +50,11 @@ public class PizzaController {
             return "deliverydetails";
         }
         // NO ERRORS
-        Integer orderID = pizzaSvc.saveOrder(order, session);
-        order.setId(orderID);
-        model.addAttribute("order", order);
+        Integer orderId = pizzaSvc.saveOrder(order, session);
+        // confirm that orderId is in DB
+        Confirmation confirmation = pizzaSvc.getConfirmation(orderId);
+        System.out.println(confirmation);
+        model.addAttribute("confirm", confirmation);
         return "confirmation";
     }
 }

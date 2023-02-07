@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.servlet.http.HttpSession;
 import nus.iss.tfip.pafpizzarest.exception.PizzaException;
+import nus.iss.tfip.pafpizzarest.model.Confirmation;
 import nus.iss.tfip.pafpizzarest.model.Order;
 import nus.iss.tfip.pafpizzarest.model.Pizza;
 import nus.iss.tfip.pafpizzarest.repository.CustomerRepository;
@@ -78,4 +79,7 @@ public class PizzaService {
         return json.build().toString();
     }
 
+    public Confirmation getConfirmation(Integer orderId) {
+        return orderRepo.getConfirmation(orderId);
+    }
 }
