@@ -29,7 +29,7 @@ public interface Queries {
             """;
 
     String SQLgetJSON = """
-            SELECT o.order_id AS orderId, c.name, c.address, c.phone, o.rush, o.comments, p.type AS pizza, s.size, o.quantity,
+            SELECT o.order_id AS orderId, c.name, c.address, c.phone, (o.rush = 1) AS rush, o.comments, p.type AS pizza, s.size, o.quantity,
             IF(o.rush=1, (round((p.price * s.multiplier * o.quantity), 2) + 2), round((p.price * s.multiplier * o.quantity), 2)) AS total
             FROM `order` o
             INNER JOIN `pizza` p
