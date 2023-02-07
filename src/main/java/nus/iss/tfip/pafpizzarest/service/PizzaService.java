@@ -61,11 +61,12 @@ public class PizzaService {
                 .add("name", response.get("name").toString())
                 .add("address", response.get("address").toString())
                 .add("phone", response.get("phone").toString())
-                .add("rush", Boolean.parseBoolean(response.get("rush").toString()))
+                .add("rush", Integer.parseInt(response.get("rush").toString())!=0)
                 .add("pizza", response.get("pizza").toString())
                 .add("size", response.get("size").toString())
                 .add("quantity", response.get("quantity").toString())
-                .add("total", Float.parseFloat(response.get("total").toString()));
+                // if not formatted, returns 10 decimal places even though SQL"round(float,2)"
+                .add("total", "%.2f".formatted(Float.parseFloat(response.get("total").toString())));
 
         // null checking for comments (its the only thing not NON NULL)
         if (null != response.get("comments")) {
